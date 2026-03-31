@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Galería tipo TikTok</title>
+
+<style>
+body{
+margin:0;
+background:black;
+color:white;
+font-family:Arial;
+text-align:center;
+overflow-x:hidden;
+}
+
+
+.btn-volver{
+position:fixed;
+top:20px;
+left:20px;
+
+display:flex;
+align-items:center;
+gap:8px;
+
+padding:10px 18px;
+background:rgba(255,0,0,0.2);
+backdrop-filter:blur(10px);
+color:white;
+text-decoration:none;
+
+border-radius:50px;
+border:1px solid rgba(255,255,255,0.2);
+
+font-weight:bold;
+letter-spacing:1px;
+
+transition:0.3s;
+z-index:1000;
+}
+
+.btn-volver:hover{
+background:red;
+transform:scale(1.1);
+box-shadow:0 0 20px red;
+}
+
+
+.btn-volver::before{
+content:"⬅";
+font-size:18px;
+}
+
+
+.titulo{
+margin:20px;
+text-shadow:0 0 15px red;
+}
+
+
+.galeria{
+display:grid;
+grid-template-columns:repeat(2, 1fr);
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:#111;
+border-radius:15px;
+padding:10px;
+box-shadow:0 0 15px red;
+transition:0.3s;
+cursor:pointer;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img,
+.card video{
+width:100%;
+border-radius:10px;
+}
+
+.card p{
+font-size:14px;
+}
+
+
+#viewer{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+overflow-y:scroll;
+scroll-snap-type:y mandatory;
+}
+
+.slide{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+scroll-snap-align:start;
+animation:fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(30px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+.slide img,
+.slide video{
+max-width:90%;
+max-height:70%;
+border-radius:15px;
+box-shadow:0 0 20px red;
+}
+
+.descripcion{
+margin-top:10px;
+font-size:16px;
+}
+
+
+#cerrar{
+position:fixed;
+top:20px;
+right:20px;
+font-size:20px;
+background:rgba(255,0,0,0.3);
+padding:10px 15px;
+border-radius:50px;
+cursor:pointer;
+backdrop-filter:blur(10px);
+transition:0.3s;
+}
+
+#cerrar:hover{
+background:red;
+transform:scale(1.1);
+}
+
+
+@media(max-width:600px){
+.galeria{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="btn-volver">Volver</a>
+
+<h1 class="titulo">📸 Mi Galería</h1>
+
+<div class="galeria">
+
+<div class="card" onclick="abrirViewer(0)">
+<img src="imagenes/concor.jpeg">
+
+</div>
+
+<div class="card" onclick="abrirViewer(1)">
+<img src="imagenes/nose.jpeg">
+
+</div>
+
+<div class="card" onclick="abrirViewer(2)">
+<img src="imagenes/previa.jpeg">
+</div>
+
+<div class="card" onclick="abrirViewer(3)">
+<img src="imagenes/pelon.jpeg">
+
+</div>
+
+</div>
+
+<div id="viewer">
+
+<div id="cerrar" onclick="cerrarViewer()">✖</div>
+
+<div class="slide">
+<img src="imagenes/jj.jpeg">
+
+</div>
+
+<div class="slide">
+<img src="imagenes/profjj.jpeg">
+
+</div>
+
+<div class="slide">
+<img src="imagenes/ganador.jpeg">
+
+</div>
+
+<div class="slide">
+<img src="imagenes/amor.jpeg">
+
+</div>
+
+</div>
+
+<script>
+function abrirViewer(index){
+let viewer = document.getElementById("viewer");
+viewer.style.display = "block";
+
+let slides = document.querySelectorAll(".slide");
+slides[index].scrollIntoView({behavior:"smooth"});
+}
+
+function cerrarViewer(){
+document.getElementById("viewer").style.display = "none";
+}
+</script>
+
+</body>
+</html>
